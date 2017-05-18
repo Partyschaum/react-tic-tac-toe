@@ -1,30 +1,20 @@
 import * as React from 'react';
 
-import { PLAYER_ONE, EMPTY_FIELD, FIELD } from '../constants';
+import { EMPTY_FIELD, FIELD } from '../constants';
 
 import './Square.css';
 
-export interface Props { };
-
-export interface State {
+export interface Props {
   field: FIELD;
+  onClick: () => void;
 };
 
-class Square extends React.Component<Props, State> {
-  constructor() {
-    super();
-    this.state = {
-      field: EMPTY_FIELD,
-    };
-  }
-
-  render() {
-    return (
-      <button className="square" onClick={() => this.setState({ field: PLAYER_ONE })}>
-        {this.state.field}
-      </button >
-    );
-  }
+function Square({ field = EMPTY_FIELD, onClick }: Props) {
+  return (
+    <button className="square" onClick={onClick}>
+      {field}
+    </button >
+  );
 }
 
 export default Square;
