@@ -11,7 +11,10 @@
     "react-dom": "^15.5.4"
   },
   "devDependencies": {
-    "react-scripts-ts": "1.4.0"
+    "@types/enzyme": "^2.8.0",
+    "enzyme": "^2.8.2",
+    "react-scripts-ts": "1.4.0",
+    "react-test-renderer": "^15.5.4"
   },
   "scripts": {
     "start": "react-scripts-ts start",
