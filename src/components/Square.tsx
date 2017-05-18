@@ -1,11 +1,12 @@
 import * as React from 'react';
 
-import { EMPTY_FIELD, FIELD } from '../constants';
+import { EMPTY_FIELD } from '../constants';
+import { Field } from '../types';
 
 import './Square.css';
 
 export interface Props {
-  field: FIELD;
+  field: Field;
   onClick: () => void;
 };
 

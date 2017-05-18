@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { EMPTY_FIELD, FIELD, PLAYER_ONE, PLAYER_TWO } from '../constants';
+import { EMPTY_FIELD, PLAYER_ONE, PLAYER_TWO } from '../constants';
+import { Field } from '../types';
 
 import Square from './Square';
 
@@ -9,7 +10,7 @@ import './Board.css';
 export interface Props { };
 
 export interface State {
-  squares: FIELD[];
+  squares: Field[];
   isPlayerOneNext: boolean;
 };
 
@@ -17,7 +18,7 @@ class Board extends React.Component<Props, State> {
   public constructor() {
     super();
     this.state = {
-      squares: Array(9).fill(EMPTY_FIELD),
+      squares: Array<Field>(9).fill(EMPTY_FIELD),
       isPlayerOneNext: true,
     };
   }
@@ -76,7 +77,7 @@ class Board extends React.Component<Props, State> {
     );
   }
 
-  private calculateWinner(squares: FIELD[]): FIELD {
+  private calculateWinner(squares: Field[]): Field {
     const lines = [
       [0, 1, 2],
       [3, 4, 5],

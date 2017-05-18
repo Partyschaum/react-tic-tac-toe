@@ -12,5 +12,3 @@ export type PLAYER_TWO = typeof PLAYER_TWO;
 
 export const EMPTY_FIELD = '';
 export type EMPTY_FIELD = typeof EMPTY_FIELD;
-
-export type FIELD = PLAYER_ONE | PLAYER_TWO | EMPTY_FIELD;
