@@ -12,6 +12,7 @@ export interface Props { };
 export interface State {
   history: History;
   isPlayerOneNext: boolean;
+  stepNumber: number;
 };
 
 class Game extends React.Component<Props, State> {
@@ -22,16 +23,25 @@ class Game extends React.Component<Props, State> {
         squares: Array<Field>(9).fill(EMPTY_FIELD),
       }],
       isPlayerOneNext: true,
+      stepNumber: 0,
     };
   }
 
-  public render() {
+  public render(): JSX.Element {
     const history = this.state.history;
-    const current = history[history.length - 1];
+    const current = history[this.state.stepNumber];
     const winner = this.calculateWinner(current.squares);
 
-    let status: string;
+    const moves = history.map((step, move) => {
+      const desc = move ? 'Move #' + move : 'Game start';
+      return (
+        <li key={move}>
+          <a href="#" onClick={() => this.jumpTo(move)}>{desc}</a>
+        </li>
+      );
+    });
 
+    let status: string;
     if (winner !== EMPTY_FIELD) {
       status = `Winner: ${winner}`;
     } else {
@@ -49,14 +59,14 @@ class Game extends React.Component<Props, State> {
         </div>
         <div className="game-info">
           <div>{status}</div>
-          <ol>{/* TODO */}</ol>
+          <ol>{moves}</ol>
         </div>
       </div>
     );
   }
 
-  private handleClick(i: number) {
-    const history = this.state.history;
+  private handleClick(i: number): void {
+    const history = this.state.history.slice(0, this.state.stepNumber + 1);
     const current = history[history.length - 1];
     const squares = current.squares.slice();
 
@@ -69,6 +79,14 @@ class Game extends React.Component<Props, State> {
         squares
       }]),
       isPlayerOneNext: !this.state.isPlayerOneNext,
+      stepNumber: history.length,
+    });
+  }
+
+  private jumpTo(step: number): void {
+    this.setState({
+      stepNumber: step,
+      isPlayerOneNext: (step % 2) ? false : true,
     });
   }
 
